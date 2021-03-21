@@ -9,23 +9,22 @@ var data = require("./data.json");
 // add response color
 var response = chalk.bold.yellow;
 
-var resumeOptions = {
+var options = {
   type: "list",
-  name: "resumeOptions",
+  name: "options",
   message: "What do you want to know",
   choices: [...Object.keys(data), "Exit"]
 };
 
-function showResume() {
-  console.log("Hello, this is my resume");
-  handleResume();
+function startApp() {
+  handleApp();
 }
 
-function handleResume() {
-  inquirer.prompt(resumeOptions).then(answer => {
-    if (answer.resumeOptions == "Exit") return;
+function handleApp() {
+  inquirer.prompt(options).then(answer => {
+    if (answer.options == "Exit") return;
 
-    const options = data[`${answer.resumeOptions}`]
+    const options = data[`${answer.options}`]
     if (options) {
       console.log(response(new inquirer.Separator()));
       options.forEach(info => {
@@ -50,4 +49,4 @@ function handleResume() {
   }).catch(err => console.log('Ooops,', err))
 }
 
-showResume();
+startApp();
